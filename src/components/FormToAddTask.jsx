@@ -3,7 +3,7 @@ import { use } from 'react';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import AllTask from './AllTask';
-const FormToAddTask = () => {
+const FormToAddTask = ({setShowNewTask ,setTasks}) => {
 
     const [HeadLine, setHeadLine]=useState("")
     const [Describe, setDescribe]=useState("")
