@@ -3,19 +3,47 @@ import { use } from 'react';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import AllTask from './AllTask';
-const FormToAddTask = ({setShowNewTask ,setTasks}) => {
+const FormToAddTask = ({  setShowNewTask ,insertTasks}) => {
 
-    const [HeadLine, setHeadLine]=useState("")
-    const [Describe, setDescribe]=useState("")
-    const handleHeadLine=(e)=>{
+    const [HeadLine, setHeadLine] = useState("")
+    const [Describe, setDescribe] = useState("")
+    const [date, setDate] = useState()
+    const [id, setId] = useState()
+    const handleHeadLine = (e) => {
         setHeadLine(e.target.value)
     }
-    const handleDescribe=(e)=>{
+    const handleDescribe = (e) => {
         setDescribe(e.target.value)
     }
-    const handleSubmitForm=()=>{
-        const addTask={HeadLine,Describe}
-        // מה המטרה בשורה הזו?
+    const handleSubmitForm = (e) => {
+        e.preventDefault()
+        const newTask = {HeadLine: HeadLine, Describe: Describe, date:new Date().toLocaleTimeString(), id:uuidv4()}
+        insertTasks(prev => [...prev, newTask])
+        setHeadLine("")
+        setDescribe("")
+        setShowNewTask(false)
+        const addTask = { HeadLine, Describe }
+        
+    }
+    const handleSubmitToDoList = (e) => {
+        <AllTask />
+    }
+
+
+    return (
+        <div >
+            <form typeof='submit' >
+                <input type="text" placeholder='HeadLine of task' onChange={handleHeadLine} /><br />
+                <input type="text" placeholder='Describe your task' onChange={handleDescribe} />
+                <button onSubmit={handleSubmitForm} >create task</button>
+            <button onSubmit={handleSubmitToDoList}>ToDoList</button>
+            </form>
+        </div>
+    )
+}
+
+export default FormToAddTask
+// מה המטרה בשורה הזו?
         // //בהתחלה חשבתי ליצור אובייקט עם כל הפרטים ואז לשלוח אותו ככה
         // //עכשיו אני מבינה שצריך שפה יהיו רק 2 סטייטים אז אני כן יעביר את זה אחד אחד לקומפוננטה שתיקח את הכל תכין אובייקט ואז תצצרף למערך
         // קודםם כל- יש לך חשיבה יפהץ
@@ -37,34 +65,10 @@ const FormToAddTask = ({setShowNewTask ,setTasks}) => {
         //     אז אוטלי נעשה שאת תהיי פה איתנו במעבר על התרגיל,
         //     ואחכ בלי להסתכל בתרגיל שלי- את פשוט תעשי את זה שוב בביתץץץמה אומרת?
         //     , initial-scale=1.0" />
-            {/* //אז בעצם בהבנה להיוץת פה?
-            ואז להמשיך בבית?
-            אני אשמח ממשאין מילים
-            אניי פשוט נוסעם היום מוקדם וקצת בלחץ....
-            אז תצאי מתי שמתאים לך, ניעה טובה וכל הכבוד שבאת<!DOCTYPE html> */}
+        // {/* //אז בעצם בהבנה להיוץת פה?
+        //     ואז להמשיך בבית?
+        //     אני אשמח ממשאין מילים
+        //     אניי פשוט נוסעם היום מוקדם וקצת בלחץ....
+        //     אז תצאי מתי שמתאים לך, ניעה טובה וכל הכבוד שבאת<!DOCTYPE html> */}
 
-        {<AllTask addTask />}
-    }
-    const handleSubmitToDoList=()=>{
-        
-    }
-
-
-  return (
-    <div>
-        <form >
-            <input type="text" placeholder='HeadLine of task' onBlur={handleHeadLine} /><br />
-            <input type="text" placeholder='Describe your task' onBlur={handleDescribe} />
-
-
-        </form>
-        <button onSubmit={handleSubmitForm} >create task</button>
-        <button  onSubmit={handleSubmitToDoList}>ToDoList</button>
-        
-       
-      
-    </div>
-  )
-}
-
-export default FormToAddTask
+        // { <AllTask addTask /> }
