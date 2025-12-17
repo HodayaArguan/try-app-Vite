@@ -1,19 +1,22 @@
 import React from 'react'
 import TaskDetails from './TaskDetails'
 
-const AllTask = (showNewTask,setShowNewTask, tasks) => {
-  handleSubmit=()=>{
-    <TaskDetails showNewTask={showNewTask}/>
-    setShowNewTask(false)
- 
-  }
+const AllTask = ({tasks, setTasks}) => {
+
 
 
   return (
     <>
     {/* //עבור כל קומפוננטה חיצונית נציג את הפרטים בלי מאפ כי הקומפוננטה החיצונית תציג כל ]עם אתץ הנוכחית */}
-    <button onClick={handleSubmit}>AllTask</button>
-    <TaskDetails tasks={tasks}/>
+    {tasks?.map((task)=>(
+      <TaskDetails 
+      key={task.id}
+      task={task}
+      setTasks={setTasks}
+
+      />
+   ) )}
+    
       
     </>
   )

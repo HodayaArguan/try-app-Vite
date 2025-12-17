@@ -7,8 +7,6 @@ const FormToAddTask = ({  setShowNewTask ,insertTasks}) => {
 
     const [HeadLine, setHeadLine] = useState("")
     const [Describe, setDescribe] = useState("")
-    const [date, setDate] = useState()
-    const [id, setId] = useState()
     const handleHeadLine = (e) => {
         setHeadLine(e.target.value)
     }
@@ -17,28 +15,24 @@ const FormToAddTask = ({  setShowNewTask ,insertTasks}) => {
     }
     const handleSubmitForm = (e) => {
         e.preventDefault()
-        const newTask = {HeadLine: HeadLine, Describe: Describe, date:new Date().toLocaleTimeString(), id:uuidv4()}
+        const newTask = {HeadLine: HeadLine, Describe: Describe, date:new Date().toLocaleTimeString(), id:uuidv4(), isComplete:false}
         insertTasks(prev => [...prev, newTask])
         setHeadLine("")
         setDescribe("")
         setShowNewTask(false)
-        const addTask = { HeadLine, Describe }
+       
         
-    }
-    const handleSubmitToDoList = (e) => {
-        <AllTask />
     }
 
 
     return (
-        <div >
-            <form typeof='submit' >
-                <input type="text" placeholder='HeadLine of task' onChange={handleHeadLine} /><br />
-                <input type="text" placeholder='Describe your task' onChange={handleDescribe} />
-                <button onSubmit={handleSubmitForm} >create task</button>
-            <button onSubmit={handleSubmitToDoList}>ToDoList</button>
+        < >
+            <form onSubmit={handleSubmitForm} >
+                <input type="text" placeholder='HeadLine of task' onChange={handleHeadLine} value={HeadLine}/><br />
+                <input type="text" placeholder='Describe your task' onChange={handleDescribe} value={Describe}/><br />
+                <button type='submit' >Create task & all tasks </button>
             </form>
-        </div>
+        </>
     )
 }
 

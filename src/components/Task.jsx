@@ -13,15 +13,18 @@ const Task = () => {
 
   return (
     <>
-      {showNewTask}?{(
+      {showNewTask?(
         <FormToAddTask
         setShowNewTask={setShowNewTask} insertTasks={setTasks}
         />
-      )}:{(
-        <button onClick={handleCreate}> Create task</button>,
+      ):(
+        <>
+        <button onClick={handleCreate}> Create task</button>
         <AllTask
-        showNewTask={showNewTask} setShowNewTask={setShowNewTask} tasks={tasks}
-        />
+        tasks={tasks} setTasks={setTasks} 
+         />
+         </>
+       
       )}
       
     
